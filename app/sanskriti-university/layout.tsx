@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   icons: {
-    icon: "/gniot/favicon.webp",
-    shortcut: "/gniot/favicon.webp",
-    apple: "/gniot/favicon.webp",
+    icon: "/sanskriti/favicon.webp",
+    shortcut: "/sanskriti/favicon.webp",
+    apple: "/sanskriti/favicon.webp",
   },
 };
 
