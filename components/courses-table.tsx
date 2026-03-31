@@ -6,17 +6,29 @@ interface Props {
 }
 
 const CoursesTable = ({ handleOpenForm }: Props) => {
+  
   const courses = [
-    { name: "B.Sc", fees: "₹8.1 Lakhs", eligibility: "10+2 with 45%", date: "5 Jan-31 Aug 2026" },
-    { name: "BBA", fees: "₹4.5 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
-    { name: "B.Pharm", fees: "₹6.8 Lakhs", eligibility: "10+2 with 55%", date: "5 Jan-31 Aug 2026" },
-    { name: "BE/B.Tech", fees: "₹11.2 Lakhs", eligibility: "10+2 with 55%", date: "5 Jan-31 Aug 2026" },
-    { name: "BCA", fees: "₹3.9 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
-    { name: "Ph.D", fees: "₹2.1 Lakhs", eligibility: "Post Graduation", date: "1 Jan-23 Jan 2026" },
-    { name: "MCA", fees: "₹3.5 Lakhs", eligibility: "Graduation with 50%", date: "5 Jan-31 Aug 2026" },
-    { name: "GNM", fees: "₹2.1 Lakhs", eligibility: "10+2 with 40%", date: "5 Jan-31 Aug 2026" },
-    { name: "M.Pharm", fees: "₹3.2 Lakhs", eligibility: "B.Pharm with 55%", date: "5 Jan-31 Aug 2026" },
-  ];
+  { name: "B.Tech", fees: "₹11.2 Lakhs", eligibility: "10+2 with 55%", date: "5 Jan-31 Aug 2026" },
+  { name: "BCA", fees: "₹3.9 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
+  { name: "BBA", fees: "₹4.5 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
+  { name: "B.Com (Hons.)", fees: "₹4.0 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
+  { name: "B.Sc", fees: "₹8.1 Lakhs", eligibility: "10+2 with 45%", date: "5 Jan-31 Aug 2026" },
+  { name: "BA LLB (Hons.)", fees: "₹6.0 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
+  { name: "B.Sc B.Ed", fees: "₹5.5 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
+  { name: "BA B.Ed", fees: "₹5.5 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
+  { name: "ANM", fees: "₹2.0 Lakhs", eligibility: "10+2 with 40%", date: "5 Jan-31 Aug 2026" },
+  { name: "BNYS", fees: "₹4.0 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
+
+  { name: "M.Tech", fees: "₹3.5 Lakhs", eligibility: "Graduation with 55%", date: "5 Jan-31 Aug 2026" },
+  { name: "MCA", fees: "₹3.5 Lakhs", eligibility: "Graduation with 50%", date: "5 Jan-31 Aug 2026" },
+  { name: "MBA", fees: "₹6.5 Lakhs", eligibility: "Graduation with 50%", date: "5 Jan-31 Aug 2026" },
+  { name: "M.Sc", fees: "₹3.0 Lakhs", eligibility: "Graduation with 50%", date: "5 Jan-31 Aug 2026" },
+
+  { name: "B.Pharma", fees: "₹6.8 Lakhs", eligibility: "10+2 with 55%", date: "5 Jan-31 Aug 2026" },
+  { name: "D.Pharma", fees: "₹2.5 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
+
+  { name: "Ph.D", fees: "₹2.1 Lakhs", eligibility: "Post Graduation", date: "1 Jan-23 Jan 2026" }
+];
 
   return (
     <section className="bg-[#f4f6f9] py-10 px-4">

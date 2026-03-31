@@ -4,38 +4,41 @@ import { useState } from "react";
 import "../app/hero.css";
 
 const courses = [
-  "B.Tech - Computer Science & Engineering",
-  "B.Tech - Artificial Intelligence",
-  "B.Tech - Artificial Intelligence & Machine Learning",
-  "B.Tech - Artificial Intelligence & Data Science",
-  "B.Tech - Cyber Security",
-  "B.Tech - Data Science",
-  "B.Tech - Information Technology",
-  "B.Tech - Electronics & Communication Engineering",
-  "B.Tech - Mechanical Engineering",
-  "B.Tech - Civil Engineering",
-  "B.Tech - Electrical Engineering",
-
-  "BCA (Bachelor of Computer Applications)",
-  "BBA (Bachelor of Business Administration)",
-  "B.Com (Bachelor of Commerce)",
+  // UG Courses
+  "B.Tech - All Branches",
+  "BCA - All Branches",
+  "Polytechnic - Diploma",
   "B.Com (Hons.)",
-  "B.Sc (Computer Science)",
-  "B.Sc Nursing",
-  "B.Pharm (Bachelor of Pharmacy)",
+  "BBA - All Branches",
+  "BA LLB (Hons.)",
+  "B.Sc B.Ed",
+  "BA B.Ed",
+  "ANM",
+  "MPT",
 
-  "MBA (Master of Business Administration)",
-  "PGDM (Post Graduate Diploma in Management)",
-  "MCA (Master of Computer Applications)",
-  "M.Tech (Master of Technology)",
+  "BNYS",
+  "B.Sc - Agriculture (Hons.)",
+  "B.Sc - Hotel Management",
+  "BA - Fashion",
+  "Diploma in Fashion",
+  "BA - Psychology (Hons.)",
+  "MA - Psychology",
 
-  "BCA + MCA (Integrated)",
-  "BBA + MBA (Integrated)",
+  // PG Courses
+  "M.Tech - CSE",
+  "MCA",
+  "MBA - Dual",
+  "MBA - Agri-Business",
+  "M.Sc - Agriculture",
+  "B.Sc - Biotech",
+  "M.Sc - Biotech",
+  "B.Sc - Forensic",
+  "B.Com LLB (Hons.)",
+  "B.El.Ed",
 
-  "BA LLB",
-  "LLB",
-  "GNM (General Nursing & Midwifery)",
-  "D.Pharm (Diploma in Pharmacy)",
+  // Pharmacy
+  "B.Pharma",
+  "D.Pharma"
 ];
 
 const cities = [
