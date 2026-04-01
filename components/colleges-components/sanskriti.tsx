@@ -69,7 +69,7 @@ const SanskritiComponents
 
 
        <Modal isOpen={isModalOpen} onClose={() => handleCloseForm()}>
-        <RegisterForm formHeading={modalHeading}/>
+        <RegisterForm />
        </Modal>
     </div>
   )
