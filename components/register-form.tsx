@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import {motion} from "framer-motion";
 
 const courses = [
   "B.Tech - All Branches",
@@ -92,11 +93,11 @@ export default function RegisterForm() {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto bg-white rounded-xl p-4
+    <div className="w-full mx-auto bg-white rounded-xl p-3 mt-2
     border-2 border-[#1e3a5f]
     shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
 
-      <h2 className="text-2xl font-bold text-[#1e3a5f] text-center mb-4">
+      <h2 className="text-2xl font-bold text-[#1e3a5f] text-center mb-2">
         Apply For Sanskriti University
       </h2>
 
@@ -106,7 +107,7 @@ export default function RegisterForm() {
         { name: "email", label: "Email", icon: "✉️" },
         { name: "phone", label: "10-digit Mobile For OTP", icon: "📞" },
       ].map((f) => (
-        <div key={f.name} className="mb-4">
+        <div key={f.name} className="mb-2">
           <label className="text-sm font-semibold text-[#1e3a5f]">
             {f.label} <span className="text-red-500">*</span>
           </label>
@@ -182,10 +183,23 @@ export default function RegisterForm() {
       {/* Submit */}
       <button
         onClick={handleSubmit}
-        className="w-full py-3 rounded-lg bg-[#1e3a5f] text-white font-semibold
+        className="w-full py-3 rounded-lg bg-[#1e3a5f] text-white font-semibold relative overflow-hidden
         hover:bg-[#16324f] transition disabled:opacity-40"
       >
         {loading ? "Submitting..." : "Submit"}
+
+         <motion.div
+            className="absolute inset-0 w-1/4 bg-linear-to-r from-transparent via-white to-transparent opacity-60"
+            animate={{
+              x: ["-100%", "400%"],
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 1,
+              ease: "linear",
+              repeatDelay: 3,
+            }}
+          />
       </button>
 
       {error && (
