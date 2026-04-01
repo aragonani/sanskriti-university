@@ -92,12 +92,12 @@ export default function RegisterForm() {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto bg-white rounded-xl p-6
+    <div className="w-full max-w-md mx-auto bg-white rounded-xl p-4
     border-2 border-[#1e3a5f]
     shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
 
-      <h2 className="text-2xl font-bold text-[#1e3a5f] text-center mb-5">
-        Application Open 2026
+      <h2 className="text-2xl font-bold text-[#1e3a5f] text-center mb-4">
+        Apply For Sanskriti University
       </h2>
 
       {/* Fields */}
