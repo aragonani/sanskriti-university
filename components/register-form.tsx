@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 const courses = [
   "B.Tech - All Branches",
@@ -52,53 +51,69 @@ export default function RegisterForm() {
   });
 
   const [focused, setFocused] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => setForm({ ...form, [e.target.name]: e.target.value });
 
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(false);
+
+    try {
+      const res = await fetch("/api/send-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) throw new Error("Failed");
+      setSubmitted(true);
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (submitted) {
+    return (
+      <div className="w-full max-w-md mx-auto bg-white rounded-xl p-6 border-2 border-[#1e3a5f] text-center">
+        <h3 className="text-xl font-bold text-[#1e3a5f] mb-2">You're In 🎉</h3>
+        <p className="text-sm text-gray-600">
+          Our team will contact you within 24 hours.
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <div
-      className="
-      w-full max-w-md mx-auto
-      bg-white
-      rounded-xl
-      p-3
+    <div className="w-full max-w-md mx-auto bg-white rounded-xl p-6
+    border-2 border-[#1e3a5f]
+    shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
 
-      /* 🔥 MAIN DIFFERENCE */
-      border-2 border-[#1e3a5f]
-      shadow-[0_20px_60px_rgba(0,0,0,0.25)]
-
-      backdrop-blur-sm
-    "
-    >
-      {/* Heading */}
-      <h2 className="text-2xl font-bold text-[#1e3a5f] text-center mb-2">
-        Apply For Sanskriti University
+      <h2 className="text-2xl font-bold text-[#1e3a5f] text-center mb-5">
+        Application Open 2026
       </h2>
 
-      {/* Input Field */}
+      {/* Fields */}
       {[
         { name: "name", label: "Full Name", icon: "👤" },
         { name: "email", label: "Email", icon: "✉️" },
         { name: "phone", label: "10-digit Mobile For OTP", icon: "📞" },
       ].map((f) => (
-        <div key={f.name} className="mb-2">
+        <div key={f.name} className="mb-4">
           <label className="text-sm font-semibold text-[#1e3a5f]">
             {f.label} <span className="text-red-500">*</span>
           </label>
 
-          <div
-            className={`
-            flex items-center gap-3 mt-1 px-4 py-3 rounded-lg bg-[#f9fbfc]
-            border-2
-            ${
-              focused === f.name
-                ? "border-[#1e3a5f]"
-                : "border-[#cbd5e1]"
-            }
-          `}
-          >
+          <div className={`flex items-center gap-3 mt-1 px-4 py-3 rounded-lg bg-[#f9fbfc] border-2
+            ${focused === f.name ? "border-[#1e3a5f]" : "border-[#cbd5e1]"}`}>
+            
             <span className="opacity-60">{f.icon}</span>
 
             <input
@@ -106,9 +121,7 @@ export default function RegisterForm() {
               value={(form as any)[f.name]}
               onChange={(e) => {
                 if (f.name === "phone") {
-                  const value = e.target.value
-                    .replace(/\D/g, "")
-                    .slice(0, 10);
+                  const value = e.target.value.replace(/\D/g, "").slice(0, 12);
                   setForm({ ...form, phone: value });
                 } else handleChange(e);
               }}
@@ -134,11 +147,7 @@ export default function RegisterForm() {
           onFocus={() => setFocused("course")}
           onBlur={() => setFocused(null)}
           className={`w-full mt-1 px-4 py-3 rounded-lg bg-[#f9fbfc] border-2 text-sm text-black placeholder:text-gray-400
-          ${
-            focused === "course"
-              ? "border-[#1e3a5f]"
-              : "border-[#cbd5e1]"
-          }`}
+          ${focused === "course" ? "border-[#1e3a5f]" : "border-[#cbd5e1]"}`}
         >
           <option value="">Course Interested</option>
           {courses.map((c) => (
@@ -161,44 +170,29 @@ export default function RegisterForm() {
           onBlur={() => setFocused(null)}
           placeholder="Your Current City"
           className={`w-full mt-1 px-4 py-3 rounded-lg bg-[#f9fbfc] border-2 text-sm text-black placeholder:text-gray-400
-          ${
-            focused === "city"
-              ? "border-[#1e3a5f]"
-              : "border-[#cbd5e1]"
-          }`}
+          ${focused === "city" ? "border-[#1e3a5f]" : "border-[#cbd5e1]"}`}
         />
       </div>
 
-      {/* Security Note */}
+      {/* Trust */}
       <p className="text-xs text-gray-500 flex items-center gap-2 mb-4">
         🔒 Your personal information is secure with us
       </p>
 
-      {/* Button */}
+      {/* Submit */}
       <button
-        className="
-        w-full py-3 rounded-lg relative overflow-hidden
-        bg-[#1e3a5f]
-        text-white font-semibold
-        hover:bg-[#16324f]
-        transition
-      "
+        onClick={handleSubmit}
+        className="w-full py-3 rounded-lg bg-[#1e3a5f] text-white font-semibold
+        hover:bg-[#16324f] transition disabled:opacity-40"
       >
-        Submit
-
-        <motion.div
-            className="absolute inset-0 w-1/4 bg-linear-to-r from-transparent via-white to-transparent opacity-60"
-            animate={{
-              x: ["-100%", "400%"],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 1,
-              ease: "linear",
-              repeatDelay: 4,
-            }}
-          />
+        {loading ? "Submitting..." : "Submit"}
       </button>
+
+      {error && (
+        <p className="text-red-500 text-xs text-center mt-2">
+          Something went wrong. Try again.
+        </p>
+      )}
     </div>
   );
 }
