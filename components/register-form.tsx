@@ -1,45 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 
 const courses = [
-  "B.Tech - All Branches",
-  "BCA - All Branches",
-  "Polytechnic - Diploma",
-  "B.Com (Hons.)",
-  "BBA - All Branches",
-  "BA LLB (Hons.)",
-  "B.Sc B.Ed",
-  "BA B.Ed",
-  "ANM",
-  "MPT",
-  "BNYS",
-  "B.Sc - Agriculture (Hons.)",
-  "B.Sc - Hotel Management",
-  "BA - Fashion",
-  "Diploma in Fashion",
-  "BA - Psychology (Hons.)",
-  "MA - Psychology",
-  "M.Tech - CSE",
-  "MCA",
-  "MBA - Dual",
-  "MBA - Agri-Business",
-  "M.Sc - Agriculture",
-  "B.Sc - Biotech",
-  "M.Sc - Biotech",
-  "B.Sc - Forensic",
-  "B.Com LLB (Hons.)",
-  "B.El.Ed",
-  "B.Pharma",
-  "D.Pharma",
-];
-
-const cities = [
-  "Delhi NCR","Mumbai","Bengaluru","Faridabad","Ghaziabad","Meerut",
-  "Aligarh","Agra","Hyderabad","Chennai","Pune","Kolkata",
-  "Ahmedabad","Jaipur","Lucknow","Gurugram","Noida",
-  "Chandigarh","Bhopal","Indore",
+  "B.Tech - All Branches","BCA - All Branches","Polytechnic - Diploma",
+  "B.Com (Hons.)","BBA - All Branches","BA LLB (Hons.)","B.Sc B.Ed",
+  "BA B.Ed","ANM","MPT","BNYS","B.Sc - Agriculture (Hons.)",
+  "B.Sc - Hotel Management","BA - Fashion","Diploma in Fashion",
+  "BA - Psychology (Hons.)","MA - Psychology","M.Tech - CSE","MCA",
+  "MBA - Dual","MBA - Agri-Business","M.Sc - Agriculture",
+  "B.Sc - Biotech","M.Sc - Biotech","B.Sc - Forensic",
+  "B.Com LLB (Hons.)","B.El.Ed","B.Pharma","D.Pharma",
 ];
 
 export default function RegisterForm() {
@@ -51,19 +23,51 @@ export default function RegisterForm() {
     course: "",
   });
 
+  const [errors, setErrors] = useState<any>({});
   const [focused, setFocused] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  // 🔹 Validation function
+  const validate = () => {
+    const newErrors: any = {};
+
+    if (!form.name.trim()) newErrors.name = "Name is required";
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^\S+@\S+\.\S+$/.test(form.email)) {
+      newErrors.email = "Invalid email format";
+    }
+
+    if (!form.phone.trim()) {
+      newErrors.phone = "Phone is required";
+    } else if (form.phone.length !== 10) {
+      newErrors.phone = "Phone must be 10 digits";
+    }
+
+    if (!form.course) newErrors.course = "Select a course";
+    if (!form.city.trim()) newErrors.city = "City is required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => setForm({ ...form, [e.target.name]: e.target.value });
+  ) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+
+    // remove error on typing
+    setErrors({ ...errors, [e.target.name]: "" });
+  };
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    if (!validate()) return;
+
     setLoading(true);
-    setError(false);
 
     try {
       const res = await fetch("/api/send-lead", {
@@ -75,7 +79,7 @@ export default function RegisterForm() {
       if (!res.ok) throw new Error("Failed");
       setSubmitted(true);
     } catch {
-      setError(true);
+      setErrors({ submit: "Something went wrong. Try again." });
     } finally {
       setLoading(false);
     }
@@ -92,6 +96,13 @@ export default function RegisterForm() {
     );
   }
 
+  const isFormValid =
+    form.name &&
+    form.email &&
+    form.phone.length === 10 &&
+    form.city &&
+    form.course;
+
   return (
     <div className="w-full mx-auto bg-white rounded-xl p-3 mt-2
     border-2 border-[#1e3a5f]
@@ -101,7 +112,7 @@ export default function RegisterForm() {
         Apply For Sanskriti University
       </h2>
 
-      {/* Fields */}
+      {/* Inputs */}
       {[
         { name: "name", label: "Full Name", icon: "👤" },
         { name: "email", label: "Email", icon: "✉️" },
@@ -114,7 +125,7 @@ export default function RegisterForm() {
 
           <div className={`flex items-center gap-3 mt-1 px-4 py-3 rounded-lg bg-[#f9fbfc] border-2
             ${focused === f.name ? "border-[#1e3a5f]" : "border-[#cbd5e1]"}`}>
-            
+
             <span className="opacity-60">{f.icon}</span>
 
             <input
@@ -129,9 +140,13 @@ export default function RegisterForm() {
               onFocus={() => setFocused(f.name)}
               onBlur={() => setFocused(null)}
               placeholder={`Enter ${f.label}`}
-              className="w-full bg-transparent outline-none text-sm text-black placeholder:text-gray-400"
+              className="w-full bg-transparent outline-none text-sm  text-black"
             />
           </div>
+
+          {errors[f.name] && (
+            <p className="text-red-500 text-xs mt-1">{errors[f.name]}</p>
+          )}
         </div>
       ))}
 
@@ -145,16 +160,17 @@ export default function RegisterForm() {
           name="course"
           value={form.course}
           onChange={handleChange}
-          onFocus={() => setFocused("course")}
-          onBlur={() => setFocused(null)}
-          className={`w-full mt-1 px-4 py-3 rounded-lg bg-[#f9fbfc] border-2 text-sm text-black placeholder:text-gray-400
-          ${focused === "course" ? "border-[#1e3a5f]" : "border-[#cbd5e1]"}`}
+          className="w-full mt-1 px-4 py-3 rounded-lg bg-[#f9fbfc] border-2 border-[#cbd5e1] text-black"
         >
           <option value="">Course Interested</option>
           {courses.map((c) => (
             <option key={c}>{c}</option>
           ))}
         </select>
+
+        {errors.course && (
+          <p className="text-red-500 text-xs mt-1">{errors.course}</p>
+        )}
       </div>
 
       {/* City */}
@@ -167,44 +183,39 @@ export default function RegisterForm() {
           name="city"
           value={form.city}
           onChange={handleChange}
-          onFocus={() => setFocused("city")}
-          onBlur={() => setFocused(null)}
           placeholder="Your Current City"
-          className={`w-full mt-1 px-4 py-3 rounded-lg bg-[#f9fbfc] border-2 text-sm text-black placeholder:text-gray-400
-          ${focused === "city" ? "border-[#1e3a5f]" : "border-[#cbd5e1]"}`}
+          className="w-full mt-1 px-4 py-3 rounded-lg bg-[#f9fbfc] border-2 border-[#cbd5e1] text-black"
         />
-      </div>
 
-      {/* Trust */}
-      <p className="text-xs text-gray-500 flex items-center gap-2 mb-4">
-        🔒 Your personal information is secure with us
-      </p>
+        {errors.city && (
+          <p className="text-red-500 text-xs mt-1">{errors.city}</p>
+        )}
+      </div>
 
       {/* Submit */}
       <button
         onClick={handleSubmit}
+       
         className="w-full py-3 rounded-lg bg-[#1e3a5f] text-white font-semibold relative overflow-hidden
-        hover:bg-[#16324f] transition disabled:opacity-40"
+        disabled:opacity-40"
       >
         {loading ? "Submitting..." : "Submit"}
 
-         <motion.div
-            className="absolute inset-0 w-1/4 bg-linear-to-r from-transparent via-white to-transparent opacity-60"
-            animate={{
-              x: ["-100%", "400%"],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 1,
-              ease: "linear",
-              repeatDelay: 3,
-            }}
-          />
+        <motion.div
+          className="absolute inset-0 w-1/4 bg-linear-to-r from-transparent via-white to-transparent opacity-60"
+          animate={{ x: ["-100%", "400%"] }}
+          transition={{
+            repeat: Infinity,
+            duration: 1,
+            ease: "linear",
+            repeatDelay: 3,
+          }}
+        />
       </button>
 
-      {error && (
+      {errors.submit && (
         <p className="text-red-500 text-xs text-center mt-2">
-          Something went wrong. Try again.
+          {errors.submit}
         </p>
       )}
     </div>
