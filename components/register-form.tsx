@@ -1,18 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-const courses = [
-  "B.Tech - All Branches","BCA - All Branches","Polytechnic - Diploma",
-  "B.Com (Hons.)","BBA - All Branches","BA LLB (Hons.)","B.Sc B.Ed",
-  "BA B.Ed","ANM","MPT","BNYS","B.Sc - Agriculture (Hons.)",
-  "B.Sc - Hotel Management","BA - Fashion","Diploma in Fashion",
-  "BA - Psychology (Hons.)","MA - Psychology","M.Tech - CSE","MCA",
-  "MBA - Dual","MBA - Agri-Business","M.Sc - Agriculture",
-  "B.Sc - Biotech","M.Sc - Biotech","B.Sc - Forensic",
-  "B.Com LLB (Hons.)","B.El.Ed","B.Pharma","D.Pharma",
+export const courses = [
+  { label: "B.Tech", value: "B.Tech - All Branches" },
+  { label: "BCA", value: "BCA - All Branches" },
+  { label: "Polytechnic", value: "Polytechnic - Diploma" },
+  { label: "B.Com", value: "B.Com (Hons.)" },
+  { label: "BBA", value: "BBA - All Branches" },
+  { label: "BA LLB", value: "BA LLB (Hons.)" },
+  { label: "B.Sc B.Ed", value: "B.Sc B.Ed" },
+  { label: "BA B.Ed", value: "BA B.Ed" },
+  { label: "ANM", value: "ANM" },
+  { label: "MPT", value: "MPT" },
+  { label: "BNYS", value: "BNYS" },
+  { label: "B.Sc Agriculture", value: "B.Sc - Agriculture (Hons.)" },
+  { label: "Hotel Management", value: "B.Sc - Hotel Management" },
+  { label: "Fashion", value: "BA - Fashion" },
+  { label: "Diploma Fashion", value: "Diploma in Fashion" },
+  { label: "Psychology", value: "BA - Psychology (Hons.)" },
+  { label: "MA Psychology", value: "MA - Psychology" },
+  { label: "M.Tech", value: "M.Tech - CSE" },
+  { label: "MCA", value: "MCA" },
+  { label: "MBA", value: "MBA - Dual" },
+  { label: "MBA Agri", value: "MBA - Agri-Business" },
+  { label: "M.Sc Agriculture", value: "M.Sc - Agriculture" },
+  { label: "Biotech", value: "B.Sc - Biotech" },
+  { label: "M.Sc Biotech", value: "M.Sc - Biotech" },
+  { label: "Forensic", value: "B.Sc - Forensic" },
+  { label: "B.Com LLB", value: "B.Com LLB (Hons.)" },
+  { label: "B.El.Ed", value: "B.El.Ed" },
+  { label: "B.Pharma", value: "B.Pharma" },
+  { label: "D.Pharma", value: "D.Pharma" },
 ];
 
 const cities = [
@@ -20,7 +41,7 @@ const cities = [
   "Lucknow","Kanpur","Jaipur"
 ];
 
-export default function RegisterForm() {
+export default function RegisterForm({ selectedCourse = "" }: { selectedCourse?: string }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -32,6 +53,29 @@ export default function RegisterForm() {
   const [errors, setErrors] = useState<any>({});
   const [focused, setFocused] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+    
+//   useEffect(() => {
+//   if (selectedCourse) {
+//     setForm((prev) => ({
+//       ...prev,
+//       course: selectedCourse,
+//     }));
+//   } else {
+//     // reset when modal reopens without selection
+//     setForm((prev) => ({
+//       ...prev,
+//       course: "",
+//     }));
+//   }
+// }, [selectedCourse]);
+
+useEffect(() => {
+  setForm((prev) => ({
+    ...prev,
+    course: selectedCourse || "",
+  }));
+}, [selectedCourse]);
 
   const router = useRouter();
 
@@ -208,8 +252,8 @@ export default function RegisterForm() {
           </option>
 
           {courses.map((c) => (
-            <option key={c} value={c} className="text-black">
-              {c}
+            <option key={c.value} value={c.value} className="text-black">
+              {c.label}
             </option>
           ))}
         </select>

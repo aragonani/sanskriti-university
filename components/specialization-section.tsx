@@ -190,7 +190,7 @@ export default function SpecializationsSection({handleOpenForm}: Props) {
           {/* Horizontal divider (mobile) */}
           <div className="lg:hidden h-px w-full bg-linear-to-r from-transparent via-white/15 to-transparent" />
 
-          <ProgramColumn tag="MBA" title="MBA" items={mba} color="blue" delay={0.15} />
+          <ProgramColumn tag="MBA" title="MBA" items={mba} color="gold" delay={0.15} />
         </div>
 
         {/* ── Bottom CTA Banner ── */}

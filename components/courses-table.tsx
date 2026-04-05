@@ -1,5 +1,6 @@
 import React from "react";
 import { Lock } from "lucide-react";
+import { courses } from "./register-form";
 
 interface Props {
   handleOpenForm: (headingText?: string) => void;
@@ -7,28 +8,11 @@ interface Props {
 
 const CoursesTable = ({ handleOpenForm }: Props) => {
   
-  const courses = [
-  { name: "B.Tech", fees: "₹11.2 Lakhs", eligibility: "10+2 with 55%", date: "5 Jan-31 Aug 2026" },
-  { name: "BCA", fees: "₹3.9 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
-  { name: "BBA", fees: "₹4.5 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
-  { name: "B.Com (Hons.)", fees: "₹4.0 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
-  { name: "B.Sc", fees: "₹8.1 Lakhs", eligibility: "10+2 with 45%", date: "5 Jan-31 Aug 2026" },
-  { name: "BA LLB (Hons.)", fees: "₹6.0 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
-  { name: "B.Sc B.Ed", fees: "₹5.5 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
-  { name: "BA B.Ed", fees: "₹5.5 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
-  { name: "ANM", fees: "₹2.0 Lakhs", eligibility: "10+2 with 40%", date: "5 Jan-31 Aug 2026" },
-  { name: "BNYS", fees: "₹4.0 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
-
-  { name: "M.Tech", fees: "₹3.5 Lakhs", eligibility: "Graduation with 55%", date: "5 Jan-31 Aug 2026" },
-  { name: "MCA", fees: "₹3.5 Lakhs", eligibility: "Graduation with 50%", date: "5 Jan-31 Aug 2026" },
-  { name: "MBA", fees: "₹6.5 Lakhs", eligibility: "Graduation with 50%", date: "5 Jan-31 Aug 2026" },
-  { name: "M.Sc", fees: "₹3.0 Lakhs", eligibility: "Graduation with 50%", date: "5 Jan-31 Aug 2026" },
-
-  { name: "B.Pharma", fees: "₹6.8 Lakhs", eligibility: "10+2 with 55%", date: "5 Jan-31 Aug 2026" },
-  { name: "D.Pharma", fees: "₹2.5 Lakhs", eligibility: "10+2 with 50%", date: "5 Jan-31 Aug 2026" },
-
-  { name: "Ph.D", fees: "₹2.1 Lakhs", eligibility: "Post Graduation", date: "1 Jan-23 Jan 2026" }
-];
+const courseTable = courses.map((c) => ({
+  name: c.label,     // 👈 UI
+  value: c.value,    // 👈 actual
+  fees: "₹ -- Lakhs",
+}));
 
   return (
     <section className="bg-[#f4f6f9] py-10 px-4">
@@ -83,7 +67,7 @@ const CoursesTable = ({ handleOpenForm }: Props) => {
 
             {/* Table Body */}
             <tbody>
-              {courses.map((course, index) => (
+              {courseTable.map((course, index) => (
                 <tr
                   key={index}
                   className="border-b border-gray-100 hover:bg-gray-50 transition"
@@ -121,7 +105,7 @@ const CoursesTable = ({ handleOpenForm }: Props) => {
 
                   <td className="px-3 py-4">
                     <button
-                      onClick={() => handleOpenForm(course.name)}
+                      onClick={() => handleOpenForm(course.value)}
                       className="bg-[#ff8400] hover:bg-[#d56e00] text-black text-sm text-nowrap font-bold py-3 px-4 rounded transition active:scale-95 shadow-sm"
                     >
                       Apply Now

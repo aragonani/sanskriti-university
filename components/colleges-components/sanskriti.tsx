@@ -20,16 +20,18 @@ const SanskritiComponents
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalHeading, setModalHeading] = useState("");
+    const [selectedCourse, setSelectedCourse] = useState("");
 
   // function to open modal with optional heading
-  const handleOpenForm = (headingText="") => {
+  const handleOpenForm = (courseName = "") => {
     setIsModalOpen(true);
-    setModalHeading(headingText)
+    setSelectedCourse(courseName);
   };
 
   const handleCloseForm = () => {
     setIsModalOpen(false);
     setModalHeading("");
+    setSelectedCourse("");
   }
 
   useEffect(() => {
@@ -69,7 +71,7 @@ const SanskritiComponents
 
 
        <Modal isOpen={isModalOpen} onClose={() => handleCloseForm()}>
-        <RegisterForm />
+        <RegisterForm selectedCourse={selectedCourse} />
        </Modal>
     </div>
   )
