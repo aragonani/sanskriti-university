@@ -14,6 +14,9 @@ import { useEffect, useState } from 'react'
 import WhatsAppSticky from '../whatsapp-button'
 import CoursesTable from '../courses-table'
 import Header from '../header'
+import MobileAdmissionCard from '../mobile-admission-card'
+import HighlightsSection from '../highlight-section'
+import OfferSection from '../timer'
 
 const SanskritiComponents
  = () => {
@@ -21,16 +24,18 @@ const SanskritiComponents
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalHeading, setModalHeading] = useState("");
     const [selectedCourse, setSelectedCourse] = useState("");
+    const [isPaused, setIsPaused] = useState(false);
 
   // function to open modal with optional heading
-  const handleOpenForm = (courseName = "") => {
+  const handleOpenForm = (courseName = "", headingText = "") => {
     setIsModalOpen(true);
     setSelectedCourse(courseName);
+    setModalHeading(headingText);
   };
 
   const handleCloseForm = () => {
     setIsModalOpen(false);
-    setModalHeading("");
+    setModalHeading("Apply For Sanskriti University");
     setSelectedCourse("");
   }
 
@@ -56,8 +61,10 @@ const SanskritiComponents
     <div>
       <ScrollProgressBar />
       <Header  handleOpenForm={handleOpenForm}/>
+      <MobileAdmissionCard handleOpenForm={handleOpenForm}/>
       <HeroSection />
       <UniversityLogos />
+      <HighlightsSection />
       <PartnershipSection  handleOpenForm={handleOpenForm}/>
       <CoursesTable handleOpenForm={handleOpenForm}/>
       <AcademicsSection/>
@@ -71,8 +78,14 @@ const SanskritiComponents
 
 
        <Modal isOpen={isModalOpen} onClose={() => handleCloseForm()}>
-        <RegisterForm selectedCourse={selectedCourse} />
+        <RegisterForm formHeading={modalHeading} selectedCourse={selectedCourse} />
        </Modal>
+
+        <OfferSection 
+        handleOpenForm={() => handleOpenForm()}
+        isTimer={true}
+        isPaused={isPaused}
+      />
     </div>
   )
 }

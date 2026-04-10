@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { ArrowRight, GraduationCap } from "lucide-react";
+import { ArrowRight, GraduationCap, Phone } from "lucide-react";
 import Image from "next/image";
 
 interface Props {
@@ -37,16 +37,8 @@ export default function Header({ handleOpenForm }: Props) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* ── Logo ── */}
-          {/* <motion.a
-            href="/"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            whileHover={{ scale: 1.02 }}
-            className="flex items-center gap-3 shrink-0 group"
-          > */}
-
-          {/* TO USE YOUR OWN LOGO IMAGE, replace the block below with: */}
+        
+         
           <Image
             src="/sanskriti/sanskriti.jpeg"
             alt="Sanskriti University Logo"
@@ -56,30 +48,18 @@ export default function Header({ handleOpenForm }: Props) {
             priority
           />
 
-          {/* Icon mark */}
-          {/* <div className="relative w-10 h-10 sm:w-11 sm:h-11 shrink-0">
-              <div className="absolute inset-0 rounded-[10px] bg-linear-to-br from-[#00648f] to-[#004260]
-                shadow-[0_4px_16px_rgba(0,100,143,0.30)] group-hover:shadow-[0_6px_22px_rgba(0,100,143,0.45)]
-                transition-shadow duration-200" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <GraduationCap className="w-5 h-5 sm:w-5.5 sm:h-5.5 text-white" />
-              </div> */}
-          {/* Gold pip */}
-          {/* <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-[#fcc423]
-                border-2 border-white shadow-sm" />
-            </div> */}
-
-          {/* Wordmark */}
-          {/* <div className="flex flex-col justify-center leading-none gap-0.5">
-              <span className="font-black text-[#001f2d] text-[20px] sm:text-[23px] tracking-[-0.04em]"
-                style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}>
-                GNIOT
-              </span>
-              <span className="text-[9px] sm:text-[10px] font-bold text-[#00648f] tracking-[0.2em] uppercase">
-                Greater Noida
-              </span>
-            </div>
-          </motion.a> */}
+           {/* 📞 Mobile Call Button */}
+            <motion.a
+              href="tel:+917696376158"
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.92 }}
+              className="sm:hidden flex items-center justify-center
+                w-10 h-10 rounded-full
+                bg-[#00648f]/10 text-[#00648f]
+                shadow-md active:scale-95 transition-all"
+            >
+              <Phone className="w-5 h-5" />
+            </motion.a>
 
           {/* ── CTA Button ── */}
           <motion.div

@@ -1,47 +1,68 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
+
 export const courses = [
-  { label: "B.Tech", value: "B.Tech - All Branches" },
-  { label: "BCA", value: "BCA - All Branches" },
-  { label: "Polytechnic", value: "Polytechnic - Diploma" },
-  { label: "B.Com", value: "B.Com (Hons.)" },
-  { label: "BBA", value: "BBA - All Branches" },
-  { label: "BA LLB", value: "BA LLB (Hons.)" },
-  { label: "B.Sc B.Ed", value: "B.Sc B.Ed" },
-  { label: "BA B.Ed", value: "BA B.Ed" },
-  { label: "ANM", value: "ANM" },
-  { label: "MPT", value: "MPT" },
-  { label: "BNYS", value: "BNYS" },
-  { label: "B.Sc Agriculture", value: "B.Sc - Agriculture (Hons.)" },
-  { label: "Hotel Management", value: "B.Sc - Hotel Management" },
-  { label: "Fashion", value: "BA - Fashion" },
-  { label: "Diploma Fashion", value: "Diploma in Fashion" },
-  { label: "Psychology", value: "BA - Psychology (Hons.)" },
-  { label: "MA Psychology", value: "MA - Psychology" },
-  { label: "M.Tech", value: "M.Tech - CSE" },
-  { label: "MCA", value: "MCA" },
-  { label: "MBA", value: "MBA - Dual" },
-  { label: "MBA Agri", value: "MBA - Agri-Business" },
-  { label: "M.Sc Agriculture", value: "M.Sc - Agriculture" },
-  { label: "Biotech", value: "B.Sc - Biotech" },
-  { label: "M.Sc Biotech", value: "M.Sc - Biotech" },
-  { label: "Forensic", value: "B.Sc - Forensic" },
-  { label: "B.Com LLB", value: "B.Com LLB (Hons.)" },
-  { label: "B.El.Ed", value: "B.El.Ed" },
-  { label: "B.Pharma", value: "B.Pharma" },
-  { label: "D.Pharma", value: "D.Pharma" },
+  { label: "B.Tech", value: "B.Tech - All Branches", eligibility: "10+2 with PCM, 50–60%" },
+  { label: "BCA", value: "BCA - All Branches", eligibility: "10+2 (any stream) with 45–50%" },
+  { label: "Polytechnic", value: "Polytechnic - Diploma", eligibility: "10th pass, 45–50%" },
+  { label: "B.Com", value: "B.Com (Hons.)", eligibility: "10+2 45–50%" },
+  { label: "BBA", value: "BBA - All Branches", eligibility: "10+2 (any stream), 45–50%" },
+  { label: "BA LLB", value: "BA LLB (Hons.)", eligibility: "10+2 (any stream), 45–50%" },
+  { label: "B.Sc B.Ed", value: "B.Sc B.Ed", eligibility: "10+2 with Science, 50%" },
+  { label: "BA B.Ed", value: "BA B.Ed", eligibility: "10+2 (any stream), 50%" },
+  { label: "ANM", value: "ANM", eligibility: "10+2 with Science, 40–45%" },
+  { label: "MPT", value: "MPT", eligibility: "Bachelor in Physiotherapy (BPT), 50–55%" },
+  { label: "BNYS", value: "BNYS", eligibility: "10+2 with PCB, 50%" },
+  { label: "B.Sc Agriculture", value: "B.Sc - Agriculture (Hons.)", eligibility: "10+2 with 50%" },
+  { label: "Hotel Management", value: "B.Sc - Hotel Management", eligibility: "10+2 (any stream), 45–50%" },
+  { label: "Fashion", value: "BA - Fashion", eligibility: "10+2 (any stream), 45–50%" },
+  { label: "Diploma Fashion", value: "Diploma in Fashion", eligibility: "10th or 10+2, 45%" },
+  { label: "Psychology", value: "BA - Psychology (Hons.)", eligibility: "10+2 (any stream), 45–50%" },
+  { label: "MA Psychology", value: "MA - Psychology", eligibility: "Bachelor’s in Psychology/related field, 50%" },
+  { label: "M.Tech", value: "M.Tech - CSE", eligibility: "B.Tech/B.E in relevant field, 50–60%" },
+  { label: "MCA", value: "MCA", eligibility: "Graduation with Mathematics/Computer, 50%" },
+  { label: "MBA", value: "MBA - Dual", eligibility: "Graduation (any stream), 50%" },
+  { label: "MBA Agri", value: "MBA - Agri-Business", eligibility: "Graduation in Agriculture field, 50%" },
+  { label: "M.Sc Agriculture", value: "M.Sc - Agriculture", eligibility: "B.Sc Agriculture, 50%" },
+  { label: "Biotech", value: "B.Sc - Biotech", eligibility: "10+2 with PCB, 50%" },
+  { label: "M.Sc Biotech", value: "M.Sc - Biotech", eligibility: "B.Sc in Biotech/Life Sciences, 50%" },
+  { label: "Forensic", value: "B.Sc - Forensic", eligibility: "10+2 with Science (PCB/PCM), 50%" },
+  { label: "B.Com LLB", value: "B.Com LLB (Hons.)", eligibility: "10+2 (any stream), 45–50%" },
+  { label: "B.El.Ed", value: "B.El.Ed", eligibility: "10+2 (any stream), 50%" },
+  { label: "B.Pharma", value: "B.Pharma", eligibility: "10+2 with PCB/PCM, 50%" },
+  { label: "D.Pharma", value: "D.Pharma", eligibility: "10+2 with PCB/PCM, 50%" },
 ];
 
 const cities = [
-  "Delhi","Noida","Gurgaon","Ghaziabad","Faridabad",
-  "Lucknow","Kanpur","Jaipur"
+  "Delhi NCR",
+  "Mumbai",
+  "Bengaluru",
+  "Faridabad",
+  "Ghaziabad",
+  "Meerut",
+  "Aligarh",
+  "Agra",
+  "Hyderabad",
+  "Chennai",
+  "Pune",
+  "Kolkata",
+  "Ahmedabad",
+  "Jaipur",
+  "Lucknow",
+  "Gurugram",
+  "Noida",
+  "Chandigarh",
+  "Bhopal",
+  "Indore",
 ];
 
-export default function RegisterForm({ selectedCourse = "" }: { selectedCourse?: string }) {
+
+export default function RegisterForm({ formHeading, selectedCourse = "" }: { formHeading?: string; selectedCourse?: string }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -141,12 +162,16 @@ useEffect(() => {
   };
 
   return (
-    <div className="w-full mx-auto bg-white rounded-xl p-3 mt-2
+    <div className="w-full max-w-sm mx-auto md:mx-0 bg-white rounded-xl p-3 mt-2
     border-2 border-[#1e3a5f]
     shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
 
-      <h2 className="text-2xl font-bold text-[#1e3a5f] text-center mb-2">
-        Apply For Sanskriti University
+      <h2 className="text-2xl font-bold text-[#1e3a5f] text-center">
+        {formHeading || "Apply For Sanskriti University"}
+      </h2>
+
+        <h2 className="text-small font-bold text-[#1e3a5f] text-center mb-2">
+         Admission Open 2026
       </h2>
 
       {/* NAME */}
