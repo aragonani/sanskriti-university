@@ -5,9 +5,15 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 const partnerLogos = [
-  { name: "ACCA", url: "/sanskriti/logo/logo-1.webp" },
-  { name: "Xebia", url: "/sanskriti/logo/logo-2.webp" },
-  { name: "Siemens", url: "/sanskriti/logo/logo-3.webp" },
+  { name: "google", url: "/sanskriti/logo/google.webp" },
+  { name: "microsoft", url: "/sanskriti/logo/microsoft.webp" },
+  { name: "boa", url: "/sanskriti/logo/boa.webp" },
+  { name: "ericsson", url: "/sanskriti/logo/ericsson.webp" },
+  { name: "icici", url: "/sanskriti/logo/icici.webp" },
+  { name: "deloitte", url: "/sanskriti/logo/deloitte.webp" },
+  { name: "levis", url: "/sanskriti/logo/levis.webp" },
+  { name: "accenture", url: "/sanskriti/logo/accenture.webp" },
+  { name: "boat", url: "/sanskriti/logo/boat.webp" },
   { name: "UltraTech", url: "/sanskriti/logo/logo-4.webp" },
   { name: "Bosch", url: "/sanskriti/logo/logo-5.webp" },
   { name: "Infosys", url: "/sanskriti/logo/logo-6.webp" },
