@@ -19,18 +19,18 @@ type CardProps = {
 };
 
 const placementData: CardProps[] = [
-  { icon: IndianRupee, value: "7.25 LPA", label: "Average Package" },
-  { icon: Trophy, value: "47 LPA", label: "Highest Package (Domestic)" },
+  { icon: IndianRupee, value: "5.50 LPA", label: "Average Package" },
+  { icon: Trophy, value: "54 LPA", label: "Highest Package (Domestic)" },
   { icon: Globe, value: "70.00 LPA", label: "Highest Package (International)" },
-  { icon: FileText, value: "1600+", label: "Placement Offers" },
-  { icon: Building2, value: "800+", label: "Companies Visited" },
+  { icon: FileText, value: "1500+", label: "Placement Offers" },
+  { icon: Building2, value: "700+", label: "Companies Visited" },
 ];
 
 const instituteData: CardProps[] = [
-  { icon: GraduationCap, value: "20,500+", label: "Proud Alumni" },
-  { icon: Briefcase, value: "11,900+", label: "Successful Placements" },
-  { icon: Users, value: "10,000+", label: "Students" },
-  { icon: UserCheck, value: "510+", label: "Faculty Members" },
+  { icon: GraduationCap, value: "18,000+", label: "Proud Alumni" },
+  { icon: Briefcase, value: "10,000+", label: "Successful Placements" },
+  { icon: Users, value: "12,000+", label: "Students" },
+  { icon: UserCheck, value: "500+", label: "Faculty Members" },
 ];
 
 function Card({ icon: Icon, value, label }: CardProps) {

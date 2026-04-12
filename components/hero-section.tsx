@@ -7,7 +7,7 @@ import "../app/hero.css";
 const stats = [
   { value: "500+", label: "Recruiters", icon: "🏢" },
   { value: "100%", label: "Placement Assistance", icon: "🎯" },
-  { value: "47 LPA", label: "Highest Package", icon: "💰" },
+  { value: "70 LPA", label: "Highest Package", icon: "💰" },
   { value: "10", label: "Years of Excellence", icon: "🏆" },
 ];
 
